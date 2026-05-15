@@ -1,11 +1,1035 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Demo Web</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lencina & Asociados — Estudio Jurídico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #3a3a3a;
+  line-height: 1.75;
+  background: #fff;
+}
+
+/* ── VARIABLES ── */
+:root {
+  --ink:      #14141e;
+  --ink2:     #3a3a4a;
+  --ink3:     #7a7a8a;
+  --gold:     #b8962e;
+  --gold-lt:  #e8d48a;
+  --teal:     #2e5c5c;
+  --teal-lt:  #4a8a8a;
+  --paper:    #f8f7f3;
+  --border:   rgba(20,20,30,0.1);
+  --white:    #ffffff;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(20,20,30,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184,150,46,0.3);
+  height: 68px;
+  display: flex;
+  align-items: center;
+}
+.nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.nav-brand span { color: var(--gold); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+.nav-links .luris-link {
+  background: var(--gold);
+  color: var(--ink) !important;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-links .luris-link:hover { opacity: 0.88; background: var(--gold) !important; }
+.luris-dot {
+  width: 6px; height: 6px;
+  background: var(--ink);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px; height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(to bottom, rgba(14,14,22,0.72) 0%, rgba(14,14,22,0.55) 60%, rgba(14,14,22,0.8) 100%),
+    url('images/homeimg.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 120px 32px 80px;
+}
+.hero-content {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold-lt);
+  margin-bottom: 24px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.hero h1 em { font-style: italic; color: var(--gold-lt); }
+.hero-sub {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: 40px;
+}
+.hero-since {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-primary-gold {
+  background: var(--gold);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 13px 28px;
+  border-radius: 7px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: opacity 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary-gold:hover { opacity: 0.85; }
+.btn-outline-white {
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 13px 28px;
+  border-radius: 7px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-outline-white:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+.hero-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--gold-lt);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── SECTIONS BASE ── */
+section { padding: 96px 32px; }
+.container { max-width: 1140px; margin: 0 auto; width: 100%; }
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-subtitle {
+  font-size: 16px;
+  color: var(--ink3);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+/* ── ÁREAS DE PRÁCTICA ── */
+#areas { background: var(--paper); }
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 52px;
+}
+.area-card {
+  background: var(--white);
+  padding: 36px 32px;
+  transition: background 0.2s;
+  cursor: default;
+}
+.area-card:hover { background: #fdfcf9; }
+.area-icon {
+  width: 48px; height: 48px;
+  background: var(--ink);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.area-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+.area-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.area-items li {
+  font-size: 13.5px;
+  color: var(--ink3);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+.area-items li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* ── LURIS BANNER ── */
+#luris {
+  background: var(--ink);
+  padding: 80px 32px;
+  position: relative;
+  overflow: hidden;
+}
+#luris::before {
+  content: 'LURIS';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 200px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.02);
+  pointer-events: none;
+  line-height: 1;
+  letter-spacing: -5px;
+}
+.luris-banner-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.luris-banner-text .section-label { color: var(--gold-lt); }
+.luris-banner-text .section-label::before { background: var(--gold-lt); }
+.luris-banner-text .section-title { color: #fff; }
+.luris-banner-text .section-subtitle { color: rgba(255,255,255,0.55); max-width: 100%; }
+.luris-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+.luris-feature {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 16px;
+}
+.luris-feature .lf-icon { font-size: 18px; margin-bottom: 8px; }
+.luris-feature .lf-title { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 4px; }
+.luris-feature .lf-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+.luris-cta-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.luris-preview-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(184,150,46,0.25);
+  border-radius: 14px;
+  padding: 24px;
+  width: 100%;
+}
+.lpc-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.lpc-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+.lpc-logo span { color: var(--gold); }
+.lpc-badge {
+  font-size: 10px;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: auto;
+}
+.lpc-msg {
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.lpc-msg.question {
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.7);
+  margin-left: 24px;
+}
+.lpc-msg.answer {
+  background: rgba(184,150,46,0.08);
+  border: 1px solid rgba(184,150,46,0.15);
+  color: rgba(255,255,255,0.75);
+}
+.lpc-source {
+  font-size: 10px;
+  background: rgba(184,150,46,0.15);
+  color: var(--gold-lt);
+  padding: 1px 7px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-top: 6px;
+}
+.btn-luris-primary {
+  background: var(--gold);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 13px 28px;
+  border-radius: 7px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: opacity 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+.btn-luris-primary:hover { opacity: 0.85; }
+.luris-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── JURISDICCIONES ── */
+#jurisdicciones { background: var(--white); }
+.jurisdicciones-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-top: 52px;
+}
+.jurisdicciones-map img {
+  width: 100%;
+  border-radius: 12px;
+  opacity: 0.9;
+  filter: grayscale(20%);
+}
+.jurisdicciones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.juris-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--ink2);
+  transition: border-color 0.15s;
+}
+.juris-item:hover { border-color: var(--teal); }
+.juris-dot {
+  width: 8px; height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── NOVEDADES ── */
+#novedades { background: var(--paper); }
+.novedades-inner { margin-top: 52px; }
+.boletin-frame {
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.boletin-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.boletin-note {
+  font-size: 12px;
+  color: var(--ink3);
+  margin-top: 12px;
+  text-align: right;
+}
+.boletin-note a { color: var(--teal); }
+
+/* ── CONTACTO ── */
+#contacto { background: var(--ink); }
+.contacto-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contacto-info .section-label { color: var(--gold-lt); }
+.contacto-info .section-label::before { background: var(--gold-lt); }
+.contacto-info .section-title { color: #fff; }
+.contacto-info .section-subtitle { color: rgba(255,255,255,0.5); }
+.contacto-details {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+}
+.contact-detail-icon {
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.contact-detail-text { line-height: 1.5; }
+.contact-detail-text strong { display: block; font-weight: 500; color: rgba(255,255,255,0.85); font-size: 13px; margin-bottom: 2px; }
+/* Form */
+.contact-form {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 36px;
+}
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: rgba(255,255,255,0.85);
+  outline: none;
+  transition: border-color 0.15s;
+  resize: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--gold); }
+.form-submit {
+  width: 100%;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin-top: 4px;
+}
+.form-submit:hover { opacity: 0.85; }
+.form-privacy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+.form-success {
+  display: none;
+  background: rgba(46,92,92,0.3);
+  border: 1px solid rgba(74,138,138,0.4);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #a0d4c8;
+  margin-bottom: 16px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #0e0e16;
+  padding: 48px 32px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+}
+.footer-brand span { color: var(--gold); }
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+}
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.3);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(14,14,22,0.98);
+    flex-direction: column;
+    padding: 16px;
+    gap: 4px;
+    border-bottom: 1px solid rgba(184,150,46,0.2);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { width: 100%; padding: 12px 16px; }
+  .luris-banner-inner,
+  .jurisdicciones-inner,
+  .contacto-inner { grid-template-columns: 1fr; gap: 40px; }
+  .luris-features { grid-template-columns: 1fr; }
+  #luris::before { display: none; }
+  .hero-stats { gap: 28px; }
+  section { padding: 64px 20px; }
+  .contact-form { padding: 24px 20px; }
+}
+
+/* ── SCROLL ANIMATION ── */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+</style>
 </head>
 <body>
-  <h1>HTest</h1>
-  <p>pagina de pruebas</p>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-brand">Lencina <span>&</span> Asociados</a>
+    <div class="nav-toggle" onclick="toggleMenu()" id="nav-toggle">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#areas">Áreas de práctica</a></li>
+      <li><a href="#jurisdicciones">Jurisdicciones</a></li>
+      <li><a href="#novedades">Novedades</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li>
+        <a href="luris-demo.html" class="luris-link">
+          <span class="luris-dot"></span>
+          Luris IA
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Estudio jurídico · Buenos Aires</div>
+    <h1>Confianza y<br><em>transparencia</em><br>desde 2006</h1>
+    <p class="hero-sub">Asesoramiento jurídico integral para personas, empresas y organizaciones en las principales jurisdicciones del país.</p>
+    <div class="hero-ctas">
+      <a href="#contacto" class="btn-primary-gold">Consultar ahora</a>
+      <a href="#areas" class="btn-outline-white">Áreas de práctica</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">+18</div>
+        <div class="hero-stat-label">Años de experiencia</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Jurisdicciones</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Áreas de práctica</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ÁREAS DE PRÁCTICA ── -->
+<section id="areas">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Especialidades</div>
+      <h2 class="section-title">Áreas de práctica</h2>
+      <p class="section-subtitle">Representación y asesoramiento en las ramas del derecho más relevantes para individuos, empresas y organizaciones.</p>
+    </div>
+    <div class="areas-grid fade-in">
+
+      <div class="area-card">
+        <div class="area-icon">🏛️</div>
+        <h3>Derecho de Ciudadanía y Visados</h3>
+        <ul class="area-items">
+          <li>Asesoramiento para radicarse en el exterior</li>
+          <li>Requisitos y trámites ante Consulado</li>
+          <li>Visa para viajes de negocio</li>
+          <li>Visa por tratamiento médico y turismo</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <div class="area-icon">⚖️</div>
+        <h3>Derecho Civil y Comercial</h3>
+        <ul class="area-items">
+          <li>Accidentes de tránsito</li>
+          <li>Acuerdos prenupciales</li>
+          <li>Concursos y quiebras</li>
+          <li>Daños y perjuicios</li>
+          <li>Divorcio y separación personal</li>
+          <li>Ejecuciones de títulos de crédito</li>
+          <li>Mediaciones — Seguros — Sucesiones</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <div class="area-icon">🤝</div>
+        <h3>Derecho del Trabajo</h3>
+        <ul class="area-items">
+          <li>Accidentes y enfermedades laborales</li>
+          <li>Asesoramiento preventivo a empresas</li>
+          <li>Cuestiones colectivas</li>
+          <li>Despidos — Diferencias salariales</li>
+          <li>Suspensiones — Trabajo no registrado</li>
+          <li>Violencia laboral</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <div class="area-icon">👥</div>
+        <h3>Defensa del Consumidor</h3>
+        <ul class="area-items">
+          <li>Daños y perjuicios al consumidor</li>
+          <li>Reclamos por ventas de bienes</li>
+          <li>Reclamos por prestación de servicios</li>
+        </ul>
+      </div>
+
+      <div class="area-card">
+        <div class="area-icon">🌿</div>
+        <h3>Derecho Ambiental</h3>
+        <ul class="area-items">
+          <li>Acción preventiva ambiental</li>
+          <li>Contaminaciones ambientales</li>
+          <li>Daños y perjuicios</li>
+          <li>Destrucción de viviendas — Incendios</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── LURIS BANNER ── -->
+<section id="luris">
+  <div class="luris-banner-inner fade-in">
+    <div class="luris-banner-text">
+      <div class="section-label">Nuevo</div>
+      <h2 class="section-title">Conocé Luris,<br>nuestro asistente<br>jurídico con IA</h2>
+      <p class="section-subtitle">Respondé consultas laborales al instante. Especializado en la LCT, jurisprudencia de la CNAT y normativa laboral argentina vigente.</p>
+      <div class="luris-features">
+        <div class="luris-feature">
+          <div class="lf-icon">⚡</div>
+          <div class="lf-title">Respuestas inmediatas</div>
+          <div class="lf-desc">Consultas 24/7 sin esperar turnos</div>
+        </div>
+        <div class="luris-feature">
+          <div class="lf-icon">📋</div>
+          <div class="lf-title">Fuentes citadas</div>
+          <div class="lf-desc">Artículos de la LCT y jurisprudencia</div>
+        </div>
+        <div class="luris-feature">
+          <div class="lf-icon">🏢</div>
+          <div class="lf-title">Para PyMEs</div>
+          <div class="lf-desc">Consultas laborales sin estudio propio</div>
+        </div>
+        <div class="luris-feature">
+          <div class="lf-icon">🗂️</div>
+          <div class="lf-title">Para estudios</div>
+          <div class="lf-desc">Historial de casos e investigación</div>
+        </div>
+      </div>
+    </div>
+    <div class="luris-cta-col">
+      <div class="luris-preview-card">
+        <div class="lpc-header">
+          <div class="lpc-logo">Luris<span>.</span></div>
+          <span class="lpc-badge">Demo</span>
+        </div>
+        <div class="lpc-msg question">
+          ¿Cómo se calcula la indemnización por despido sin causa?
+        </div>
+        <div class="lpc-msg answer">
+          Según el <span class="lpc-source">art. 245 LCT</span>, la base es la mejor remuneración mensual, normal y habitual del último año, multiplicada por cada año de antigüedad o fracción mayor a 3 meses...
+        </div>
+      </div>
+      <a href="luris-demo.html" class="btn-luris-primary">
+        Probar Luris →
+      </a>
+      <p class="luris-note">Actualmente disponible en derecho laboral.<br>Acceso para clientes del estudio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── JURISDICCIONES ── -->
+<section id="jurisdicciones">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Cobertura</div>
+      <h2 class="section-title">Jurisdicciones</h2>
+      <p class="section-subtitle">Asistencia letrada judicial y extrajudicial en la Ciudad de Buenos Aires y las principales provincias del país.</p>
+    </div>
+    <div class="jurisdicciones-inner fade-in">
+      <div class="jurisdicciones-map">
+        <img src="images/arg.jpg" alt="Mapa de jurisdicciones — Argentina">
+      </div>
+      <div class="jurisdicciones-list">
+        <div class="juris-item"><span class="juris-dot"></span>Ciudad Autónoma de Buenos Aires</div>
+        <div class="juris-item"><span class="juris-dot"></span>Provincia de Buenos Aires</div>
+        <div class="juris-item"><span class="juris-dot"></span>Mendoza</div>
+        <div class="juris-item"><span class="juris-dot"></span>Neuquén</div>
+        <div class="juris-item"><span class="juris-dot"></span>Córdoba</div>
+        <div class="juris-item"><span class="juris-dot"></span>Santa Fe</div>
+        <div class="juris-item"><span class="juris-dot"></span>Chaco</div>
+        <div style="margin-top:12px; padding:16px 18px; background:var(--paper); border-radius:8px; font-size:13px; color:var(--ink3); line-height:1.6;">
+          Para consultas fuera de estas jurisdicciones, nuestro equipo puede orientarlo hacia profesionales de nuestra red de colaboradores.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NOVEDADES ── -->
+<section id="novedades">
+  <div class="container fade-in">
+    <div class="section-label">Actualidad</div>
+    <h2 class="section-title">Últimas novedades</h2>
+    <p class="section-subtitle">Mantenete al día con la normativa vigente a través del Boletín Oficial de la República Argentina.</p>
+    <div class="novedades-inner">
+      <div class="boletin-frame">
+        <iframe src="https://www.boletinoficial.gob.ar/seccion/primera" title="Boletín Oficial de la República Argentina"></iframe>
+      </div>
+      <p class="boletin-note">Fuente: <a href="https://www.boletinoficial.gob.ar" target="_blank" rel="noopener">boletinoficial.gob.ar</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ── -->
+<section id="contacto">
+  <div class="container">
+    <div class="contacto-inner">
+      <div class="contacto-info fade-in">
+        <div class="section-label">Contacto</div>
+        <h2 class="section-title">¿Cómo podemos ayudarte?</h2>
+        <p class="section-subtitle">Escribinos para coordinar una consulta. Respondemos dentro de las 24 horas hábiles.</p>
+        <div class="contacto-details">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉️</div>
+            <div class="contact-detail-text">
+              <strong>Email</strong>
+              info@llabogados.com
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div class="contact-detail-text">
+              <strong>Jurisdicción principal</strong>
+              Ciudad Autónoma de Buenos Aires
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🕐</div>
+            <div class="contact-detail-text">
+              <strong>Horario de atención</strong>
+              Lunes a viernes, 9:00 a 18:00 hs
+            </div>
+          </div>
+          <div class="contact-detail" style="margin-top:8px; padding:16px; background:rgba(184,150,46,0.07); border:1px solid rgba(184,150,46,0.15); border-radius:10px;">
+            <div class="contact-detail-icon">🤖</div>
+            <div class="contact-detail-text" style="color:rgba(255,255,255,0.55)">
+              <strong style="color:var(--gold-lt)">Consultas 24/7 con Luris</strong>
+              Para consultas laborales urgentes, nuestro asistente IA está disponible en todo momento.
+              <a href="luris-demo.html" style="color:var(--gold);text-decoration:none;font-weight:500;display:block;margin-top:6px;">Ir a Luris →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form fade-in">
+        <div class="form-success" id="form-success">
+          ✓ Su mensaje fue enviado. Nos pondremos en contacto a la brevedad.
+        </div>
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" id="f-name" placeholder="Dr. / Lic. / Sr." autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="f-email" placeholder="su@email.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Área de consulta</label>
+          <input type="text" id="f-area" placeholder="Ej: Derecho laboral, Civil…">
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea id="f-msg" rows="5" placeholder="Describí brevemente su situación o consulta…"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Enviar consulta</button>
+        <p class="form-privacy">Los datos ingresados son confidenciales y serán utilizados únicamente para contactarlo de forma privada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Lencina <span>&</span> Asociados</div>
+    <div class="footer-copy">© 2026 · Estudio Jurídico Lencina & Asociados · Buenos Aires, Argentina</div>
+    <div class="footer-links">
+      <a href="#areas">Áreas</a>
+      <a href="#contacto">Contacto</a>
+      <a href="luris-demo.html">Luris IA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav mobile
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('open');
+}
+// Close on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open'));
+});
+
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Form submit
+function submitForm() {
+  const name  = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const msg   = document.getElementById('f-msg').value.trim();
+  if (!name || !email || !msg) { alert('Por favor completá nombre, email y mensaje.'); return; }
+  document.getElementById('form-success').style.display = 'block';
+  ['f-name','f-email','f-area','f-msg'].forEach(id => document.getElementById(id).value = '');
+  setTimeout(() => document.getElementById('form-success').style.display = 'none', 5000);
+}
+</script>
 </body>
 </html>
