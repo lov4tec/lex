@@ -35,106 +35,220 @@ body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(
 .screen.active { display: flex; }
 
 /* ══════════════════════════════════════
-   LANDING / SELECTOR DE PERFIL
+   LANDING / PRICING
 ══════════════════════════════════════ */
 #screen-landing {
-  align-items: center;
-  justify-content: center;
   background: var(--ink);
-  gap: 0;
+  overflow-y: auto;
+  height: auto;
+  align-items: center;
 }
 .landing-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 52px;
+  font-size: 44px;
   font-weight: 600;
   color: var(--white);
   letter-spacing: 2px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .landing-logo span { color: var(--gold); }
 .landing-tagline {
-  font-size: 14px;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 1px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 }
-.landing-subtitle {
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 24px;
+/* ── PRICING PAGE ── */
+.pricing-top {
+  text-align: center;
+  padding: 52px 24px 0;
+  width: 100%;
+}
+.pricing-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.pricing-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.42);
+  max-width: 460px;
+  margin: 0 auto 14px;
+  line-height: 1.65;
+}
+.pricing-billing-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(184,150,46,0.1);
+  border: 1px solid rgba(184,150,46,0.2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: var(--gold-lt);
+  margin-bottom: 44px;
+}
+.pricing-section {
+  width: 100%;
+  max-width: 1160px;
+  padding: 0 24px 20px;
+}
+.pricing-section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.psl-icon { font-size: 18px; }
+.psl-title {
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.3);
 }
-.profile-cards {
-  display: flex;
-  gap: 20px;
+.psl-line { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+.plan-row {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 36px;
 }
-.profile-card {
-  width: 260px;
+.plan-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.plan-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.plan-card {
   background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 16px;
-  padding: 32px 28px;
+  padding: 26px 22px;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
-  text-align: left;
+  transition: background 0.2s, border-color 0.2s, transform 0.18s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
-.profile-card:hover {
-  background: rgba(255,255,255,0.08);
+.plan-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(184,150,46,0.45);
+  transform: translateY(-2px);
+}
+.plan-card.featured {
   border-color: var(--gold);
-  transform: translateY(-3px);
+  background: rgba(184,150,46,0.06);
 }
-.profile-card .pc-icon {
-  font-size: 28px;
-  margin-bottom: 16px;
-  display: block;
+.plan-card.featured:hover { background: rgba(184,150,46,0.1); }
+.plan-badge {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.profile-card .pc-title {
+.plan-badge.popular { background: var(--gold); color: var(--ink); }
+.plan-badge.new { background: var(--teal); color: #d4ede8; }
+.plan-card-header { margin-bottom: 16px; }
+.plan-type {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 5px;
+}
+.plan-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
   font-weight: 600;
-  color: var(--white);
-  margin-bottom: 8px;
+  color: #fff;
+  margin-bottom: 4px;
 }
-.profile-card .pc-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.6;
-  margin-bottom: 20px;
+.plan-tagline {
+  font-size: 12px;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.5;
 }
-.profile-card .pc-features {
+.plan-price-block { margin-bottom: 16px; }
+.plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 1px;
+}
+.plan-price-currency { font-size: 13px; font-weight: 500; color: var(--gold-lt); margin-bottom: 2px; }
+.plan-price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+}
+.plan-price-period { font-size: 12px; color: rgba(255,255,255,0.3); }
+.plan-price-usd { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 2px; }
+.plan-consultas {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 14px;
+}
+.plan-features {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-.profile-card .pc-features li {
-  font-size: 12px;
-  color: rgba(255,255,255,0.6);
-  display: flex;
-  align-items: center;
   gap: 7px;
+  flex: 1;
+  margin-bottom: 20px;
 }
-.profile-card .pc-features li::before {
-  content: '';
-  width: 5px; height: 5px;
-  background: var(--gold);
-  border-radius: 50%;
-  flex-shrink: 0;
+.plan-features li {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.45;
 }
-.profile-card.pyme-card:hover .pc-enter { color: var(--gold-lt); }
-.profile-card .pc-enter {
+.plan-features li .pf-check { color: var(--gold); flex-shrink: 0; }
+.plan-features li .pf-x { color: rgba(255,255,255,0.18); flex-shrink: 0; }
+.plan-features li.dimmed { color: rgba(255,255,255,0.22); }
+.plan-cta {
   display: block;
-  margin-top: 24px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.2s;
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+.plan-cta.gold { background: var(--gold); color: var(--ink); }
+.plan-cta.outline { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.65); }
+.plan-cta.teal { background: var(--teal); color: #d4ede8; }
+.plan-cta:hover { opacity: 0.82; }
+.pricing-footer {
+  text-align: center;
+  padding: 4px 24px 40px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.16);
+  line-height: 1.7;
+  max-width: 560px;
 }
 .landing-demo-note {
-  margin-top: 40px;
+  margin-top: 0;
   font-size: 11px;
   color: rgba(255,255,255,0.2);
   letter-spacing: 0.5px;
@@ -601,39 +715,214 @@ body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(
 <body>
 
 <!-- ══════════════════════════════
-     PANTALLA 1: SELECTOR DE PERFIL
+     PANTALLA 1: PLANES Y PRECIOS
 ══════════════════════════════ -->
 <div id="screen-landing" class="screen active">
-  <div class="landing-logo">Luris<span>.</span></div>
-  <div class="landing-tagline">Asistente jurídico laboral · Argentina</div>
-  <div class="landing-subtitle">Elegí tu perfil para continuar</div>
-  <div class="profile-cards">
-    <div class="profile-card" onclick="enterMode('pyme')">
-      <span class="pc-icon">🏢</span>
-      <div class="pc-title">PyME</div>
-      <div class="pc-desc">Para empresas que necesitan consultas laborales sin tener un estudio jurídico propio.</div>
-      <ul class="pc-features">
-        <li>Consultas laborales ilimitadas</li>
-        <li>Revisión de contratos</li>
-        <li>Alertas de cumplimiento</li>
-        <li>Escalado a abogado humano</li>
-      </ul>
-      <span class="pc-enter">Ingresar como PyME →</span>
+
+  <div class="pricing-top">
+    <div class="landing-logo">Luris<span>.</span></div>
+    <div class="landing-tagline">Asistente jurídico laboral · Argentina</div>
+    <h2 class="pricing-headline">Elegí el plan que se adapta<br>a tu necesidad</h2>
+    <p class="pricing-sub">Acceso a asesoramiento jurídico laboral con IA, respaldado por el equipo de Lencina & Asociados.</p>
+    <div class="pricing-billing-note">✦ Suscripción mensual · sin permanencia · cancelá cuando quieras</div>
+  </div>
+
+  <!-- ── PLAN CONSULTA ── -->
+  <div class="pricing-section">
+    <div class="pricing-section-label">
+      <span class="psl-icon">👤</span>
+      <span class="psl-title">Plan Consulta — Para profesionales y particulares</span>
+      <div class="psl-line"></div>
     </div>
-    <div class="profile-card" onclick="enterMode('estudio')">
-      <span class="pc-icon">⚖️</span>
-      <div class="pc-title">Estudio jurídico</div>
-      <div class="pc-desc">Para abogados que quieren potenciar su práctica con IA e historial de casos.</div>
-      <ul class="pc-features">
-        <li>Historial por cliente</li>
-        <li>Memoria de casos anteriores</li>
-        <li>Investigación jurídica asistida</li>
-        <li>Multi-usuario por estudio</li>
-      </ul>
-      <span class="pc-enter">Ingresar como estudio →</span>
+    <div class="plan-row cols-2">
+
+      <div class="plan-card" onclick="enterPlan('consulta-basico')">
+        <div class="plan-card-header">
+          <div class="plan-type">Consulta</div>
+          <div class="plan-name">Básico</div>
+          <div class="plan-tagline">Para consultas puntuales sin compromiso</div>
+        </div>
+        <div class="plan-price-block">
+          <div class="plan-price">
+            <span class="plan-price-currency">ARS $</span>
+            <span class="plan-price-amount">9.900</span>
+            <span class="plan-price-period">/mes</span>
+          </div>
+          <div class="plan-price-usd">≈ USD 9 · tipo de cambio oficial</div>
+        </div>
+        <div class="plan-consultas">💬 10 consultas por mes</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span>Chat con agente laboral especializado</li>
+          <li><span class="pf-check">✓</span>Citas de artículos LCT y jurisprudencia CNAT</li>
+          <li><span class="pf-check">✓</span>Historial de la sesión activa</li>
+          <li class="dimmed"><span class="pf-x">✕</span>Historial de consultas anteriores</li>
+          <li class="dimmed"><span class="pf-x">✕</span>Escalado a abogado humano incluido</li>
+        </ul>
+        <button class="plan-cta outline" onclick="enterPlan('consulta-basico')">Probar demo →</button>
+      </div>
+
+      <div class="plan-card featured" onclick="enterPlan('consulta-pro')">
+        <span class="plan-badge popular">Más elegido</span>
+        <div class="plan-card-header">
+          <div class="plan-type">Consulta</div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-tagline">Para uso frecuente con historial incluido</div>
+        </div>
+        <div class="plan-price-block">
+          <div class="plan-price">
+            <span class="plan-price-currency">ARS $</span>
+            <span class="plan-price-amount">19.900</span>
+            <span class="plan-price-period">/mes</span>
+          </div>
+          <div class="plan-price-usd">≈ USD 18 · tipo de cambio oficial</div>
+        </div>
+        <div class="plan-consultas">💬 30 consultas por mes</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span>Chat con agente laboral especializado</li>
+          <li><span class="pf-check">✓</span>Citas de artículos LCT y jurisprudencia CNAT</li>
+          <li><span class="pf-check">✓</span>Historial de consultas de los últimos 30 días</li>
+          <li><span class="pf-check">✓</span>1 escalado mensual a abogado humano incluido</li>
+          <li class="dimmed"><span class="pf-x">✕</span>Múltiples usuarios</li>
+        </ul>
+        <button class="plan-cta gold" onclick="enterPlan('consulta-pro')">Probar demo →</button>
+      </div>
+
     </div>
   </div>
-  <div class="landing-demo-note">Demo — sin registro requerido</div>
+
+  <!-- ── PLAN EMPRESA ── -->
+  <div class="pricing-section">
+    <div class="pricing-section-label">
+      <span class="psl-icon">🏢</span>
+      <span class="psl-title">Plan Empresa — Para PyMEs y empresas</span>
+      <div class="psl-line"></div>
+    </div>
+    <div class="plan-row cols-2">
+
+      <div class="plan-card" onclick="enterMode('pyme')">
+        <div class="plan-card-header">
+          <div class="plan-type">Empresa</div>
+          <div class="plan-name">Estándar</div>
+          <div class="plan-tagline">Respaldo jurídico laboral sin retainer fijo</div>
+        </div>
+        <div class="plan-price-block">
+          <div class="plan-price">
+            <span class="plan-price-currency">ARS $</span>
+            <span class="plan-price-amount">29.900</span>
+            <span class="plan-price-period">/mes</span>
+          </div>
+          <div class="plan-price-usd">≈ USD 27 · tipo de cambio oficial</div>
+        </div>
+        <div class="plan-consultas">💬 50 consultas por mes</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span>Todo lo del Plan Consulta Pro</li>
+          <li><span class="pf-check">✓</span>Revisión de cláusulas contractuales</li>
+          <li><span class="pf-check">✓</span>Alertas de cumplimiento laboral</li>
+          <li><span class="pf-check">✓</span>2 usuarios simultáneos</li>
+          <li class="dimmed"><span class="pf-x">✕</span>Escalados ilimitados a abogado humano</li>
+        </ul>
+        <button class="plan-cta outline" onclick="enterMode('pyme')">Probar demo →</button>
+      </div>
+
+      <div class="plan-card featured" onclick="enterMode('pyme')">
+        <span class="plan-badge popular">Recomendado</span>
+        <div class="plan-card-header">
+          <div class="plan-type">Empresa</div>
+          <div class="plan-name">Premium</div>
+          <div class="plan-tagline">Consultas ilimitadas + equipo legal humano</div>
+        </div>
+        <div class="plan-price-block">
+          <div class="plan-price">
+            <span class="plan-price-currency">ARS $</span>
+            <span class="plan-price-amount">59.900</span>
+            <span class="plan-price-period">/mes</span>
+          </div>
+          <div class="plan-price-usd">≈ USD 54 · tipo de cambio oficial</div>
+        </div>
+        <div class="plan-consultas">♾️ Consultas ilimitadas</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span>Todo lo del Plan Empresa Estándar</li>
+          <li><span class="pf-check">✓</span>Escalados ilimitados a abogado humano</li>
+          <li><span class="pf-check">✓</span>Revisión completa de contratos laborales</li>
+          <li><span class="pf-check">✓</span>Hasta 5 usuarios simultáneos</li>
+          <li><span class="pf-check">✓</span>Respuesta prioritaria en menos de 4 hs</li>
+        </ul>
+        <button class="plan-cta gold" onclick="enterMode('pyme')">Probar demo →</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PLAN ESTUDIO ── -->
+  <div class="pricing-section">
+    <div class="pricing-section-label">
+      <span class="psl-icon">⚖️</span>
+      <span class="psl-title">Plan Estudio — Para estudios jurídicos</span>
+      <div class="psl-line"></div>
+    </div>
+    <div class="plan-row cols-2">
+
+      <div class="plan-card" onclick="enterMode('estudio')">
+        <span class="plan-badge new">Nuevo</span>
+        <div class="plan-card-header">
+          <div class="plan-type">Estudio</div>
+          <div class="plan-name">Equipo</div>
+          <div class="plan-tagline">IA + historial de casos para tu equipo</div>
+        </div>
+        <div class="plan-price-block">
+          <div class="plan-price">
+            <span class="plan-price-currency">ARS $</span>
+            <span class="plan-price-amount">89.900</span>
+            <span class="plan-price-period">/mes</span>
+          </div>
+          <div class="plan-price-usd">≈ USD 82 · tipo de cambio oficial</div>
+        </div>
+        <div class="plan-consultas">♾️ Consultas ilimitadas · 3 usuarios</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span>Ficha de cliente con memoria de casos</li>
+          <li><span class="pf-check">✓</span>Historial completo de consultas por cliente</li>
+          <li><span class="pf-check">✓</span>Investigación jurídica asistida</li>
+          <li><span class="pf-check">✓</span>3 usuarios con roles (socio / asociado)</li>
+          <li class="dimmed"><span class="pf-x">✕</span>Usuarios ilimitados</li>
+        </ul>
+        <button class="plan-cta teal" onclick="enterMode('estudio')">Probar demo →</button>
+      </div>
+
+      <div class="plan-card featured" onclick="enterMode('estudio')">
+        <span class="plan-badge new">Nuevo</span>
+        <div class="plan-card-header">
+          <div class="plan-type">Estudio</div>
+          <div class="plan-name">Firma</div>
+          <div class="plan-tagline">Solución completa para el estudio entero</div>
+        </div>
+        <div class="plan-price-block">
+          <div class="plan-price">
+            <span class="plan-price-currency">ARS $</span>
+            <span class="plan-price-amount">159.900</span>
+            <span class="plan-price-period">/mes</span>
+          </div>
+          <div class="plan-price-usd">≈ USD 145 · tipo de cambio oficial</div>
+        </div>
+        <div class="plan-consultas">♾️ Consultas ilimitadas · usuarios ilimitados</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span>Todo lo del Plan Estudio Equipo</li>
+          <li><span class="pf-check">✓</span>Usuarios ilimitados con roles personalizados</li>
+          <li><span class="pf-check">✓</span>Onboarding asistido por el equipo de Luris</li>
+          <li><span class="pf-check">✓</span>Exportación de historial de casos</li>
+          <li><span class="pf-check">✓</span>SLA de respuesta garantizado</li>
+        </ul>
+        <button class="plan-cta gold" onclick="enterMode('estudio')">Probar demo →</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="pricing-footer">
+    Los precios indicados son orientativos y están expresados en pesos argentinos (ARS). La equivalencia en USD es aproximada al tipo de cambio oficial. Esta es una demo de producto — los planes no están activos aún.<br><br>
+    Las respuestas del asistente tienen carácter informativo y no constituyen asesoramiento jurídico profesional.
+  </div>
+  <div class="landing-demo-note" style="margin-bottom: 32px;">Demo · Lencina & Asociados · 2026</div>
+
 </div>
 
 <!-- ══════════════════════════════
@@ -643,11 +932,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(
   <header class="app-header">
     <div class="app-logo" onclick="goHome()">Luris<span>.</span></div>
     <div class="header-center">
-      <span class="mode-badge pyme">PyME</span>
+      <span class="mode-badge pyme" id="pyme-mode-badge">Plan Empresa</span>
     </div>
     <div class="header-right">
-      <div class="consultas-info">Consultas este mes: <strong id="pyme-count">8</strong> / 30</div>
-      <button class="btn-switch" onclick="goHome()">Cambiar perfil</button>
+      <div class="consultas-info">Consultas este mes: <strong id="pyme-count">8</strong> / <span id="pyme-limit">50</span></div>
+      <button class="btn-switch" onclick="goHome()">Ver planes</button>
     </div>
   </header>
   <div class="app-body">
@@ -724,7 +1013,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(
     </div>
     <div class="header-right">
       <div class="consultas-info">Dr. Martín Suárez &nbsp;·&nbsp; Estudio Suárez & Asociados</div>
-      <button class="btn-switch" onclick="goHome()">Cambiar perfil</button>
+      <button class="btn-switch" onclick="goHome()">Ver planes</button>
     </div>
   </header>
   <div class="app-body">
@@ -885,7 +1174,30 @@ let isLoadingEstudio = false;
 // ══════════════════════════════════════
 // NAVIGATION
 // ══════════════════════════════════════
+const PLAN_CONFIG = {
+  'consulta-basico': { label: 'Plan Consulta · Básico',  limit: 10 },
+  'consulta-pro':    { label: 'Plan Consulta · Pro',     limit: 30 },
+};
+
+function enterPlan(planId) {
+  const cfg = PLAN_CONFIG[planId];
+  if (cfg) {
+    document.getElementById('pyme-mode-badge').textContent = cfg.label;
+    document.getElementById('pyme-limit').textContent = cfg.limit;
+    pymeCount = cfg.limit - 2;
+    document.getElementById('pyme-count').textContent = pymeCount;
+  }
+  enterMode('pyme');
+}
+
 function enterMode(mode) {
+  // Reset pyme badge if entering pyme directly (not via enterPlan)
+  if (mode === 'pyme' && !PLAN_CONFIG[mode]) {
+    document.getElementById('pyme-mode-badge').textContent = 'Plan Empresa';
+    document.getElementById('pyme-limit').textContent = '50';
+    pymeCount = 48;
+    document.getElementById('pyme-count').textContent = pymeCount;
+  }
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + mode).classList.add('active');
   if (mode === 'estudio') renderClients(CLIENTS);
